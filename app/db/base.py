@@ -14,7 +14,7 @@ NAMING_CONVENTION = {
 class Base(DeclarativeBase):
     metadata = MetaData(naming_convention=NAMING_CONVENTION)
 
-class TimeStampMixin:
+class TimestampMixin:
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

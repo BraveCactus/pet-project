@@ -12,6 +12,7 @@ from alembic import context
 # иначе autogenerate не увидит таблицы.
 from app.core.config import settings
 from app.db.base import Base
+import app.db.models
 
 # Alembic Config object — даёт доступ к значениям из alembic.ini
 config = context.config
