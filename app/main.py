@@ -3,6 +3,7 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI, Depends
 
+from app.api.v1.router import api_router
 from app.core.config import settings
 from app.db.session import get_db
 
@@ -11,6 +12,8 @@ app = FastAPI(
     version=settings.APP_VERSION,
     debug=settings.DEBUG,
 )
+
+app.include_router(api_router, prefix="/api/v1")
 
 @app.get("/health", tags=["system"])
 async def heath() -> dict:
