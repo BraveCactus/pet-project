@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     REDIS_PORT: int = 6379
     REDIS_PASSWORD: str = ""
 
+    # --- Kafka ---
+    KAFKA_BOOTSTRAP_SERVERS: str
+
      # --- Yandex S3 ---
     S3_ACCESS_KEY: str = ""
     S3_SECRET_KEY: str = ""

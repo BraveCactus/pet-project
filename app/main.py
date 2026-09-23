@@ -1,7 +1,10 @@
 import uvicorn
-from fastapi import FastAPI
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import FastAPI, Depends
 
 from app.core.config import settings
+from app.db.session import get_db
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -18,5 +21,11 @@ async def heath() -> dict:
         "env": settings.APP_ENV,
     }
 
+@app.get("/health/db", tags=["system"])
+async def check_db(db: AsyncSession = Depends(get_db)) -> dict:
+    result = await db.execute(text("SELECT 1"))    
+    return {"db_result": result.scalar()}
+    
+
 def dev() -> None:
-    uvicorn.run("app.main:app", reload=True)
+    uvicorn.run("app.main:app", reload=True)    
